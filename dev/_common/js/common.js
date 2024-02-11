@@ -8,9 +8,9 @@ gsap.defaults({
 });
 
 const read = {
-	t1: 1.8,
-	t2: 1.2, 
-	t3: 2
+	t1: 2,
+	t2: 2, 
+	t3: 1
 }
 
 const {w, h} = bannerSize
@@ -27,40 +27,72 @@ function init(){
 	return tl
 }
 
-function textOn(){
-	return {duration:.3, x:-30, y:10, opacity:0}
+
+function shakerDog(){
+	TweenLite.set(".dog_2", {opacity:0})
+	const tl = new TimelineMax({repeat:-1})
+	const TIME = .13
+	tl.set(".dog_2", {opacity:1}, `+=${TIME}`)
+	tl.set(".dog_2", {opacity:0}, `+=${TIME}`)
+	return tl
 }
 
+function shakerPhone(DOM){
+	const XX = 7
+	// TweenLite.set(DOM, {x:XX})
+	const tl = new TimelineMax()
+	tl.repeat(-1)
+	const TIME = .002
+
+	
+	tl.to(DOM, {x:-XX, ease:"none", duration:.05}, `+=${TIME}`)
+	tl.to(DOM, {x:XX, ease:"none", duration:.05}, `+=${TIME}`)
+	return tl
+}
 
 function standard(){	
 	const tl = init()	
-	
-	tl.add("playa")
-	tl.from(".playa img", {duration:.5, x:-42, y:40, ease:Power4.easeOut}, "playa")
-	tl.from(".ball", {duration:.5, x:50, y:-50, ease:Power4.easeOut}, "playa")
-	tl.from(".t1", {...textOn()}, "playa+=.2")
-
-	tl.to(".t1", {duration:.2, opacity:0}, `+=${read.t1}`)
-
-	tl.from(".t2", {...textOn()}, "+=.1")
-	tl.from(".bubble-1", {duration:.2, opacity:0}, "+=.2")
-	tl.from(".bubble-2", {duration:.2, opacity:0})
-	tl.from(".bubble-3", {duration:.2, opacity:0})
-	tl.to(".t2", {duration:.2, opacity:0}, `+=${read.t2}`)
-	tl.from(".t3", {...textOn()})
-	tl.to([".t3", ".bubble"], {duration:.2, opacity:0}, `+=${read.t3}`)
+	const tlDog = shakerDog()
+	tl.set(".hand-screen", {y:bannerSize.h})
+	tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.5")
 	
 
-	tl.add("tint")
-	tl.to(".proline-small", {duration:.2, opacity:0}, `tint`)
-	tl.from(".tint", {duration:.35, ease:Power4.easeOut, y:-h, opacity:0}, "tint")
+	tl.add("t2", `+=${read.t1}`)
+	tl.to(".txt-shakin", {x:bannerSize.w, duration:.3}, "t2")
+	tl.from(".txt-app", {x:-bannerSize.w, duration:.3}, "t2")
+	tl.to(".hand-screen", {y:164, duration:.5})
 
+	tl.add("tint", `+=${read.t2}`)
+	tl.add(()=>{
+		tlDog.pause()
+	}, "tint")
+	tl.to(".txt-app", {opacity:0, duration:.3}, "tint")
+	tl.from(".tint", {opacity:0, duration:.3}, "tint")	
+	tl.from(".txt-shake", {x:-bannerSize.w, duration:.3}, "tint+=.3")
+	tl.from(".arrows", {opacity:0, duration:.3}, "tint+=.3")
+	tl.to(".hand-screen", {y:0, duration:.5}, "tint")
 
-	tl.from([".end-logos"], {duration:.3, opacity:0}, "+=.2")
-	tl.from(".end-cta", {duration:.3, opacity:0}, "+=.2")
-	tl.add("final")
-	tl.from(".end-legal", {duration:.3, opacity:0}, "final+=.2")
-	tl.add(olg(), "final")
+	const tlShakePhone = shakerPhone(".hand-screen")
+	tlShakePhone.pause()
+	
+	tl.add(()=>{
+		tlShakePhone.resume()
+	}, "+=1.6")
+	
+	
+
+	tl.to(".frame2", {opacity:1, duration:.3}, "+=1")
+
+	tl.add("stop-shaking", "+=.7")
+	tl.to(".end-screen", {opacity:1, duration:.3}, "stop-shaking-=.5")
+	tl.add(()=>{		
+		tlShakePhone.pause(0)		
+	}, "stop-shaking")
+
+	tl.from([".txt-download, .end-cta"], {opacity:0, duration:.3}, "+=.5")
+	tl.from([".end-logos", ".end-corners" ], {opacity:0, duration:.3}, "+=.3")
+	// tl.play("tint")
+	tl.add(olg)
 	return tl
 }
 
@@ -94,4 +126,4 @@ function b_728x90(text1){
 	standard()
 }
 
-export { init, standard, b_300x250, olg, read, textOn, w, h}
+export { init, standard, b_300x250, olg, read, w, h}
