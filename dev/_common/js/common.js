@@ -8,7 +8,7 @@ gsap.defaults({
 });
 
 const read = {
-	t1: 2,
+	t1: 1.6,
 	t2: 2, 
 	t3: 1
 }
@@ -38,8 +38,7 @@ function shakerDog(){
 }
 
 function shakerPhone(DOM){
-	const XX = 7
-	// TweenLite.set(DOM, {x:XX})
+	const XX = 6	
 	const tl = new TimelineMax()
 	tl.repeat(-1)
 	const TIME = .002
@@ -54,7 +53,7 @@ function standard(){
 	const tl = init()	
 	const tlDog = shakerDog()
 	tl.set(".hand-screen", {y:bannerSize.h})
-	tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.5")
+	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
 	
 
 	tl.add("t2", `+=${read.t1}`)
@@ -73,10 +72,12 @@ function standard(){
 	tl.to(".hand-screen", {y:0, duration:.5}, "tint")
 
 	const tlShakePhone = shakerPhone(".hand-screen")
+
 	tlShakePhone.pause()
 	
 	tl.add(()=>{
 		tlShakePhone.resume()
+
 	}, "+=1.6")
 	
 	

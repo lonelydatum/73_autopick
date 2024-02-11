@@ -63,7 +63,7 @@ gsap.defaults({
 });
 
 var read = {
-	t1: 2,
+	t1: 1.6,
 	t2: 2,
 	t3: 1
 };
@@ -92,8 +92,7 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = 7;
-	// TweenLite.set(DOM, {x:XX})
+	var XX = 6;
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
@@ -107,7 +106,7 @@ function standard() {
 	var tl = init();
 	var tlDog = shakerDog();
 	tl.set(".hand-screen", { y: bannerSize.h });
-	tl.from(".txt-shakin", { x: -bannerSize.w, duration: .3 }, "+=.5");
+	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
 
 	tl.add("t2", "+=" + read.t1);
 	tl.to(".txt-shakin", { x: bannerSize.w, duration: .3 }, "t2");
@@ -125,6 +124,7 @@ function standard() {
 	tl.to(".hand-screen", { y: 0, duration: .5 }, "tint");
 
 	var tlShakePhone = shakerPhone(".hand-screen");
+
 	tlShakePhone.pause();
 
 	tl.add(function () {
