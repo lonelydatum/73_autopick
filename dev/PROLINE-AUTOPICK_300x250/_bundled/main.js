@@ -53,14 +53,17 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = arguments.length <= 1 || arguments[1] === undefined ? 6 : arguments[1];
+	var XX = arguments.length <= 1 || arguments[1] === undefined ? 3 : arguments[1];
+	var ROTATE = arguments.length <= 2 || arguments[2] === undefined ? 4 : arguments[2];
 
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
 
-	tl.to(DOM, { x: -XX, ease: "none", duration: .05 }, "+=" + TIME);
-	tl.to(DOM, { x: XX, ease: "none", duration: .05 }, "+=" + TIME);
+	var DURATION = .08;
+
+	tl.to(DOM, { x: "+=3", rotation: -ROTATE, ease: "none", duration: DURATION }, "+=" + TIME);
+	tl.to(DOM, { x: "-=3", rotation: ROTATE, ease: "none", duration: DURATION }, "+=" + TIME);
 	return tl;
 }
 

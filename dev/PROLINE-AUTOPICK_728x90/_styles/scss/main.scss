@@ -5,3 +5,9 @@
 #legalBtn{
 	@include pos(660, 0);
 }
+
+
+.hand-screen{
+	// @include pos-scale-rotate(0, 0, 1, 5);
+	transform-origin: 662px 80px;
+}

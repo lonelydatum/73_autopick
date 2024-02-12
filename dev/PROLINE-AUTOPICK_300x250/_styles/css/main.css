@@ -241,4 +241,10 @@ canvas, .text, .frame, .outline, img {
   width: 60px;
 }
 
+.hand-screen {
+  -webkit-transform-origin: 205px 223px;
+  -ms-transform-origin: 205px 223px;
+  transform-origin: 205px 223px;
+}
+
 /*# sourceMappingURL=main.css.map */

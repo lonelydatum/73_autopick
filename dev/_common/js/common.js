@@ -37,15 +37,17 @@ function shakerDog(){
 	return tl
 }
 
-function shakerPhone(DOM, XX=6){
+function shakerPhone(DOM, XX=3, ROTATE=4){
 	
 	const tl = new TimelineMax()
 	tl.repeat(-1)
 	const TIME = .002
+	
+	const DURATION = .08
 
 	
-	tl.to(DOM, {x:-XX, ease:"none", duration:.05}, `+=${TIME}`)
-	tl.to(DOM, {x:XX, ease:"none", duration:.05}, `+=${TIME}`)
+	tl.to(DOM, { x:"+=3", rotation:-ROTATE, ease:"none", duration:DURATION}, `+=${TIME}`)
+	tl.to(DOM, { x:"-=3", rotation:ROTATE, ease:"none", duration:DURATION}, `+=${TIME}`)
 	return tl
 }
 
@@ -78,7 +80,6 @@ function standard({handPos}){
 	
 	tl.add(()=>{
 		tlShakePhone.resume()
-
 	}, "+=1.6")
 	
 	
@@ -89,7 +90,7 @@ function standard({handPos}){
 	tl.to(".end-screen", {opacity:1, duration:.3}, "stop-shaking-=.5")
 	tl.add(()=>{		
 		tlShakePhone.pause(0)		
-	}, "stop-shaking")
+	},"stop-shaking")
 
 	if(universalBanner.size==="300x250"){
 		tl.to(".hand-screen", {x:-5, y:-25, duration:.3}, "stop-shaking-=.5")	

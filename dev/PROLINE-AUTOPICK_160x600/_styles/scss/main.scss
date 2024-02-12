@@ -6,3 +6,7 @@
 	// opacity:1;
 }
 
+.hand-screen{
+	// @include pos-scale-rotate(0, 0, 1, 5);
+	transform-origin: 80px 500px;
+}

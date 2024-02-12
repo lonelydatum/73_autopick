@@ -7,7 +7,7 @@ function standard({handPos}){
 	const tlDog = shakerDog()
 
 	// return
-	tl.set(".hand-screen", {y:bannerSize.h})
+	tl.set(".hand-screen", {y:350})
 	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
 	
 
@@ -18,7 +18,7 @@ function standard({handPos}){
 
 	
 	
-	tl.to(".hand-screen", {y:handPos, duration:.5})
+	tl.to(".hand-screen", {y:130, duration:.5})
 
 	tl.add("tint", `+=${read.t2}`)
 	tl.add(()=>{
@@ -32,9 +32,9 @@ function standard({handPos}){
 
 	
 	tl.from(".arrows", {opacity:0, duration:.3}, "tint+=.3")
-	tl.to(".hand-screen", {y:0, duration:.5}, "tint")
+	tl.to(".hand-screen", {y:85, duration:.5}, "tint")
 
-	const tlShakePhone = shakerPhone(".hand-screen")
+	const tlShakePhone = shakerPhone(".hand-screen", 3, 2)
 
 	tlShakePhone.pause()
 	

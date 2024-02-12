@@ -243,14 +243,17 @@ canvas, .text, .frame, .outline, img {
 }
 
 .hand-screen {
-  -webkit-transform: translate(-3px, -10px) scale(1.4, 1.4);
-  -ms-transform: translate(-3px, -10px) scale(1.4, 1.4);
-  transform: translate(-3px, -10px) scale(1.4, 1.4);
+  -webkit-transform: translate(190px, 0px) scale(1.4, 1.4);
+  -ms-transform: translate(190px, 0px) scale(1.4, 1.4);
+  transform: translate(190px, 0px) scale(1.4, 1.4);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000px;
   perspective: 1000px;
   position: absolute;
+  -webkit-transform-origin: 480px 240px;
+  -ms-transform-origin: 480px 240px;
+  transform-origin: 480px 240px;
 }
 
 /*# sourceMappingURL=main.css.map */

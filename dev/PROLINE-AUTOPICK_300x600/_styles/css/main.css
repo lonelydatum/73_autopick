@@ -257,4 +257,10 @@ canvas, .text, .frame, .outline, img {
   position: absolute;
 }
 
+.hand-screen {
+  -webkit-transform-origin: 150px 500px;
+  -ms-transform-origin: 150px 500px;
+  transform-origin: 150px 500px;
+}
+
 /*# sourceMappingURL=main.css.map */

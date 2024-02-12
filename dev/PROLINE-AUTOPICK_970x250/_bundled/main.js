@@ -12,14 +12,14 @@ function standard(_ref) {
 	var tlDog = (0, _commonJsCommonJs.shakerDog)();
 
 	// return
-	tl.set(".hand-screen", { y: _commonJsCommonJs.bannerSize.h });
+	tl.set(".hand-screen", { y: 350 });
 	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
 
 	tl.add("t2", "+=" + _commonJsCommonJs.read.t1);
 	tl.to(".txt-shakin", { y: -_commonJsCommonJs.bannerSize.h, duration: .3 }, "t2");
 	tl.from(".txt-app", { y: _commonJsCommonJs.bannerSize.h, duration: .3 }, "t2");
 
-	tl.to(".hand-screen", { y: handPos, duration: .5 });
+	tl.to(".hand-screen", { y: 130, duration: .5 });
 
 	tl.add("tint", "+=" + _commonJsCommonJs.read.t2);
 	tl.add(function () {
@@ -31,9 +31,9 @@ function standard(_ref) {
 	tl.from(".txt-shake", { y: _commonJsCommonJs.bannerSize.h, duration: .3 }, "tint+=.3");
 
 	tl.from(".arrows", { opacity: 0, duration: .3 }, "tint+=.3");
-	tl.to(".hand-screen", { y: 0, duration: .5 }, "tint");
+	tl.to(".hand-screen", { y: 85, duration: .5 }, "tint");
 
-	var tlShakePhone = (0, _commonJsCommonJs.shakerPhone)(".hand-screen");
+	var tlShakePhone = (0, _commonJsCommonJs.shakerPhone)(".hand-screen", 3, 2);
 
 	tlShakePhone.pause();
 
@@ -108,14 +108,17 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = arguments.length <= 1 || arguments[1] === undefined ? 6 : arguments[1];
+	var XX = arguments.length <= 1 || arguments[1] === undefined ? 3 : arguments[1];
+	var ROTATE = arguments.length <= 2 || arguments[2] === undefined ? 4 : arguments[2];
 
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
 
-	tl.to(DOM, { x: -XX, ease: "none", duration: .05 }, "+=" + TIME);
-	tl.to(DOM, { x: XX, ease: "none", duration: .05 }, "+=" + TIME);
+	var DURATION = .08;
+
+	tl.to(DOM, { x: "+=3", rotation: -ROTATE, ease: "none", duration: DURATION }, "+=" + TIME);
+	tl.to(DOM, { x: "-=3", rotation: ROTATE, ease: "none", duration: DURATION }, "+=" + TIME);
 	return tl;
 }
 
