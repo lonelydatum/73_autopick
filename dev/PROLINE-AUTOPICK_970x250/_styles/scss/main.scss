@@ -11,6 +11,6 @@
 
 .hand-screen{
 	// @include pos-scale-rotate(0, 0, 1, 5);
-	@include pos-scale(190, 0, 1.4);
-	transform-origin: 480px 240px;
+	@include pos-scale(230, 90, 1.4);
+	transform-origin: 580px 240px;
 }

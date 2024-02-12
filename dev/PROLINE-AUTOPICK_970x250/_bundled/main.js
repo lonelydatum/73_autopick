@@ -33,7 +33,7 @@ function standard(_ref) {
 	tl.from(".arrows", { opacity: 0, duration: .3 }, "tint+=.3");
 	tl.to(".hand-screen", { y: 85, duration: .5 }, "tint");
 
-	var tlShakePhone = (0, _commonJsCommonJs.shakerPhone)(".hand-screen", 3, 2);
+	var tlShakePhone = (0, _commonJsCommonJs.shakerPhone)(".hand-screen", 2, 5);
 
 	tlShakePhone.pause();
 

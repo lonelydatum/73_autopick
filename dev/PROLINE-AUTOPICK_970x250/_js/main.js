@@ -34,7 +34,7 @@ function standard({handPos}){
 	tl.from(".arrows", {opacity:0, duration:.3}, "tint+=.3")
 	tl.to(".hand-screen", {y:85, duration:.5}, "tint")
 
-	const tlShakePhone = shakerPhone(".hand-screen", 3, 2)
+	const tlShakePhone = shakerPhone(".hand-screen", 2, 5)
 
 	tlShakePhone.pause()
 	
