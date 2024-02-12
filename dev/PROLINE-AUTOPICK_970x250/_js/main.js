@@ -1,46 +1,70 @@
-import {h, init, olg, read, textOn} from '../../_common/js/common.js'
+import {init, read, bannerSize, shakerDog, shakerPhone} from '../../_common/js/common.js'
 
-
-
-function standard(){	
+standard({handPos:0})
+function standard({handPos}){	
+	const xy = "y"
 	const tl = init()	
+	const tlDog = shakerDog()
+
+	// return
+	tl.set(".hand-screen", {y:bannerSize.h})
+	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
+	
+
+	tl.add("t2", `+=${read.t1}`)
+	tl.to(".txt-shakin", {y:-bannerSize.h, duration:.3}, "t2")
+	tl.from(".txt-app", {y:bannerSize.h, duration:.3}, "t2")
+	
 
 	
 	
-	tl.add("playa")
-	tl.from(".playa img", {duration:.5, x:-80, y:80, ease:Power3.easeOut}, "playa")
-	tl.from(".ball", {duration:.5, x:"+=100", y:"-=50", ease:Power3.easeOut}, "playa")
+	tl.to(".hand-screen", {y:handPos, duration:.5})
 
-	// tl.to([".bet", ".phone", ".ball", ".playa"], {x:0, duration:1.2}, "playa")
+	tl.add("tint", `+=${read.t2}`)
+	tl.add(()=>{
+		tlDog.pause()
+	}, "tint")
+	tl.to(".txt-app", {opacity:0, duration:.3}, "tint")
+	tl.from(".tint", {opacity:0, duration:.3}, "tint")	
+
+	tl.from(".txt-shake", {y:bannerSize.h, duration:.3}, "tint+=.3")
 
 
-	tl.from(".t1", {...textOn()}, "-=.5")
+	
+	tl.from(".arrows", {opacity:0, duration:.3}, "tint+=.3")
+	tl.to(".hand-screen", {y:0, duration:.5}, "tint")
 
-	tl.to(".t1", {duration:.2, opacity:0}, `+=${read.t1}`)
+	const tlShakePhone = shakerPhone(".hand-screen")
 
-	tl.from(".t2", {...textOn()}, "+=.1")
-	// tl.to(".bet", {opacity:0, duration:.1})
-	tl.from(".bubble-1", {duration:.2, opacity:0}, "+=.2")
-	tl.from(".bubble-2", {duration:.2, opacity:0})
-	tl.from(".bubble-3", {duration:.2, opacity:0})
-	tl.to(".t2", {duration:.2, opacity:0}, `+=${read.t2}`)
-	tl.from(".t3", {...textOn()})
-	tl.to([".t3", ".bubble", ".bet"], {duration:.2, opacity:0}, `+=${read.t3}`)
+	tlShakePhone.pause()
+	
+	tl.add(()=>{
+		tlShakePhone.resume()
+	}, "+=1.6")
+	
 	
 
-	tl.add("tint")
-	tl.to(".proline-small", {duration:.2, opacity:0}, `tint`)
-	tl.from(".tint", {duration:.2, ease:Power4.easeOut, y:-h, opacity:0}, "tint")
+	tl.to(".frame2", {opacity:1, duration:.3}, "+=1")
+	
 
+	tl.add("stop-shaking")
 
-	tl.from([".end-logos"], {duration:.3, opacity:0}, "+=.2")
+	
+	tl.to(".end-screen", {opacity:1, duration:.3}, "stop-shaking-=.5")
 
-	tl.from(".end-cta", {duration:.3, opacity:0}, "+=.2")
-	tl.add("final")
-	tl.from(".end-legal", {duration:.3, opacity:0}, "final+=.2")
-	tl.add(olg(), "final")
+	
 
+	tl.add(()=>{		
+		tlShakePhone.pause(0)		
+	}, "stop-shaking")
+
+	tl.to(".hand-screen", {x:0, y:0, duration:.5, scale:1}, "stop-shaking")	
+
+	
+
+	tl.from([".txt-download, .end-cta"], {opacity:0, duration:.3}, "+=.5")
+	tl.from([".end-logos", ".end-corners" ], {opacity:0, duration:.3}, "+=.3")
+	// tl.play("tint")
+	tl.add(olg)
 	return tl
 }
-
-standard()

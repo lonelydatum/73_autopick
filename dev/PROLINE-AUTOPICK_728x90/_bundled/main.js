@@ -1,53 +1,62 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-function textOn() {
-	return { opacity: 0, duration: .3, y: "+=50", ease: Power4.easeOut };
-}
+standard({ handPos: 0 });
+function standard(_ref) {
+	var handPos = _ref.handPos;
 
-function standard() {
+	var xy = "y";
 	var tl = (0, _commonJsCommonJs.init)();
+	var tlDog = (0, _commonJsCommonJs.shakerDog)();
+	tl.set(".hand-screen", { y: _commonJsCommonJs.bannerSize.h });
+	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
 
-	TweenLite.set([".bet", ".phone", ".ball", ".playa"], { x: "+=225" });
+	tl.add("t2", "+=" + _commonJsCommonJs.read.t1);
+	tl.to(".txt-shakin", { y: -_commonJsCommonJs.bannerSize.h, duration: .3 }, "t2");
+	tl.from(".txt-app", { y: _commonJsCommonJs.bannerSize.h, duration: .3 }, "t2");
 
-	tl.add("playa");
-	tl.from(".playa img", { duration: 1.2, x: -42, y: 40, ease: Power4.easeOut }, "playa");
-	tl.from(".ball", { duration: .5, x: "+=50", y: "-=90", ease: Power4.easeOut }, "playa");
+	tl.to(".hand-screen", { y: handPos, duration: .5 });
 
-	tl.to([".bet", ".phone", ".ball", ".playa"], { x: 0, duration: 1.2 }, "playa");
+	tl.add("tint", "+=" + _commonJsCommonJs.read.t2);
+	tl.add(function () {
+		tlDog.pause();
+	}, "tint");
+	tl.to(".txt-app", { opacity: 0, duration: .3 }, "tint");
+	tl.from(".tint", { opacity: 0, duration: .3 }, "tint");
 
-	tl.from(".t1", _extends({}, textOn()), "-=.5");
+	tl.from(".txt-shake", { y: _commonJsCommonJs.bannerSize.h, duration: .3 }, "tint+=.3");
 
-	tl.to(".t1", { duration: .2, opacity: 0 }, "+=" + _commonJsCommonJs.read.t1);
+	tl.from(".arrows", { opacity: 0, duration: .3 }, "tint+=.3");
+	tl.to(".hand-screen", { y: 0, duration: .5 }, "tint");
 
-	tl.from(".t2", _extends({}, textOn()), "+=.1");
-	tl.to(".bet", { opacity: 0, duration: .1 });
-	tl.from(".bubble-1", { duration: .2, opacity: 0 }, "+=.2");
-	tl.from(".bubble-2", { duration: .2, opacity: 0 });
-	tl.from(".bubble-3", { duration: .2, opacity: 0 });
-	tl.to(".t2", { duration: .2, opacity: 0 }, "+=" + _commonJsCommonJs.read.t2);
-	tl.from(".t3", _extends({}, textOn()));
-	tl.to([".t3", ".bubble", ".bet"], { duration: .2, opacity: 0 }, "+=" + _commonJsCommonJs.read.t3);
+	var tlShakePhone = (0, _commonJsCommonJs.shakerPhone)(".hand-screen");
 
-	tl.add("tint");
-	tl.to(".proline-small", { duration: .2, opacity: 0 }, "tint");
+	tlShakePhone.pause();
 
-	tl.from(".tint", { duration: .2, ease: Power4.easeOut, y: -_commonJsCommonJs.h, opacity: 0 }, "tint");
-	tl.from([".end-logos"], { duration: .3, opacity: 0 }, "+=.2");
+	tl.add(function () {
+		tlShakePhone.resume();
+	}, "+=1.6");
 
-	tl.from(".end-cta", { duration: .3, opacity: 0 }, "+=.2");
-	tl.add("final");
-	tl.from(".end-legal", { duration: .3, opacity: 0 }, "final+=.2");
-	tl.add((0, _commonJsCommonJs.olg)(), "final");
+	tl.to(".frame2", { opacity: 1, duration: .3 }, "+=1");
 
+	tl.add("stop-shaking");
+
+	tl.to(".end-screen", { opacity: 1, duration: .3 }, "stop-shaking-=.5");
+
+	tl.add(function () {
+		tlShakePhone.pause(0);
+	}, "stop-shaking");
+
+	tl.to(".hand-screen", { x: -236, duration: .3 }, "stop-shaking");
+
+	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
+	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
+	// tl.play("tint")
+	tl.add(olg);
 	return tl;
 }
-
-standard();
 
 },{"../../_common/js/common.js":2}],2:[function(require,module,exports){
 "use strict";
@@ -97,7 +106,8 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = 6;
+	var XX = arguments.length <= 1 || arguments[1] === undefined ? 6 : arguments[1];
+
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
@@ -107,7 +117,10 @@ function shakerPhone(DOM) {
 	return tl;
 }
 
-function standard() {
+function standard(_ref) {
+	var handPos = _ref.handPos;
+
+	console.log(handPos);
 	var tl = init();
 	var tlDog = shakerDog();
 	tl.set(".hand-screen", { y: bannerSize.h });
@@ -116,7 +129,7 @@ function standard() {
 	tl.add("t2", "+=" + read.t1);
 	tl.to(".txt-shakin", { x: bannerSize.w, duration: .3 }, "t2");
 	tl.from(".txt-app", { x: -bannerSize.w, duration: .3 }, "t2");
-	tl.to(".hand-screen", { y: 164, duration: .5 });
+	tl.to(".hand-screen", { y: handPos, duration: .5 });
 
 	tl.add("tint", "+=" + read.t2);
 	tl.add(function () {
@@ -143,6 +156,10 @@ function standard() {
 	tl.add(function () {
 		tlShakePhone.pause(0);
 	}, "stop-shaking");
+
+	if (universalBanner.size === "300x250") {
+		tl.to(".hand-screen", { x: -5, y: -25, duration: .3 }, "stop-shaking-=.5");
+	}
 
 	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
 	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
@@ -187,6 +204,9 @@ exports.olg = _proline.olg;
 exports.read = read;
 exports.w = w;
 exports.h = h;
+exports.shakerDog = shakerDog;
+exports.shakerPhone = shakerPhone;
+exports.bannerSize = bannerSize;
 
 },{"./helpers/helpers.js":3,"./proline":4}],3:[function(require,module,exports){
 "use strict";

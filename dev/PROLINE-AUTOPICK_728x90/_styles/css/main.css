@@ -196,6 +196,21 @@ canvas, .text, .frame, .outline, img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tint {
+  opacity: .46;
+  mix-blend-mode: hard-light;
+}
+
+.hand-screen .end-screen {
+  opacity: 0;
+}
+
 #banner {
   width: 728px;
   height: 90px;
@@ -226,39 +241,10 @@ canvas, .text, .frame, .outline, img {
   width: 80px;
 }
 
-.playa {
-  -webkit-clip-path: polygon(104px 85px, 106px 90px, 234px 90px, 234px 0px, 0px 0px);
-  clip-path: polygon(104px 85px, 106px 90px, 234px 90px, 234px 0px, 0px 0px);
-  -webkit-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  position: absolute;
-  width: 728px;
-  height: 90px;
-}
-
-.playa img {
-  -webkit-transform: translate(0px, 0px) scale(0.5, 0.5);
-  -ms-transform: translate(0px, 0px) scale(0.5, 0.5);
-  transform: translate(0px, 0px) scale(0.5, 0.5);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  position: absolute;
-}
-
-.tint {
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  -webkit-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
+#legalBtn {
+  -webkit-transform: translate(660px, 0px);
+  -ms-transform: translate(660px, 0px);
+  transform: translate(660px, 0px);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-perspective: 1000px;

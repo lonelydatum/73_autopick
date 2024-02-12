@@ -3,7 +3,7 @@
 
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-(0, _commonJsCommonJs.standard)();
+(0, _commonJsCommonJs.standard)({ handPos: 164 });
 
 },{"../../_common/js/common.js":2}],2:[function(require,module,exports){
 "use strict";
@@ -53,7 +53,8 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = 6;
+	var XX = arguments.length <= 1 || arguments[1] === undefined ? 6 : arguments[1];
+
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
@@ -63,7 +64,10 @@ function shakerPhone(DOM) {
 	return tl;
 }
 
-function standard() {
+function standard(_ref) {
+	var handPos = _ref.handPos;
+
+	console.log(handPos);
 	var tl = init();
 	var tlDog = shakerDog();
 	tl.set(".hand-screen", { y: bannerSize.h });
@@ -72,7 +76,7 @@ function standard() {
 	tl.add("t2", "+=" + read.t1);
 	tl.to(".txt-shakin", { x: bannerSize.w, duration: .3 }, "t2");
 	tl.from(".txt-app", { x: -bannerSize.w, duration: .3 }, "t2");
-	tl.to(".hand-screen", { y: 164, duration: .5 });
+	tl.to(".hand-screen", { y: handPos, duration: .5 });
 
 	tl.add("tint", "+=" + read.t2);
 	tl.add(function () {
@@ -99,6 +103,10 @@ function standard() {
 	tl.add(function () {
 		tlShakePhone.pause(0);
 	}, "stop-shaking");
+
+	if (universalBanner.size === "300x250") {
+		tl.to(".hand-screen", { x: -5, y: -25, duration: .3 }, "stop-shaking-=.5");
+	}
 
 	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
 	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
@@ -143,6 +151,9 @@ exports.olg = _proline.olg;
 exports.read = read;
 exports.w = w;
 exports.h = h;
+exports.shakerDog = shakerDog;
+exports.shakerPhone = shakerPhone;
+exports.bannerSize = bannerSize;
 
 },{"./helpers/helpers.js":3,"./proline":4}],3:[function(require,module,exports){
 "use strict";

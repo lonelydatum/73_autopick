@@ -3,38 +3,60 @@
 
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-function standard() {
+standard({ handPos: 0 });
+function standard(_ref) {
+	var handPos = _ref.handPos;
+
+	var xy = "y";
 	var tl = (0, _commonJsCommonJs.init)();
+	var tlDog = (0, _commonJsCommonJs.shakerDog)();
+	tl.set(".hand-screen", { y: _commonJsCommonJs.bannerSize.h });
+	// tl.from(".txt-shakin", {x:-bannerSize.w, duration:.3}, "+=.2")
 
-	tl.from(".el-1", { duration: .3, opacity: 0 });
-	tl.to(".el-1", { duration: .3, opacity: 0 }, "+=1");
+	tl.add("t2", "+=" + _commonJsCommonJs.read.t1);
+	tl.to(".txt-shakin", { y: -_commonJsCommonJs.bannerSize.h, duration: .3 }, "t2");
+	tl.from(".txt-app", { y: _commonJsCommonJs.bannerSize.h, duration: .3 }, "t2");
 
-	tl.from(".el-2", { duration: .3, opacity: 0 });
-	tl.to(".el-2", { duration: .3, opacity: 0 }, "+=1");
+	tl.to(".hand-screen", { y: handPos, duration: .5 });
 
-	tl.from(".el-3-txt", { duration: .3, opacity: 0 });
-	tl.to(".el-3-txt", { duration: .3, opacity: 0 }, "+=" + _commonJsCommonJs.read.t1);
+	tl.add("tint", "+=" + _commonJsCommonJs.read.t2);
+	tl.add(function () {
+		tlDog.pause();
+	}, "tint");
+	tl.to(".txt-app", { opacity: 0, duration: .3 }, "tint");
+	tl.from(".tint", { opacity: 0, duration: .3 }, "tint");
 
-	tl.from(".el-4-txt", { duration: .3, opacity: 0 });
-	tl.to(".el-4-txt", { duration: .3, opacity: 0 }, "+=" + _commonJsCommonJs.read.t2);
+	tl.from(".txt-shake", { y: _commonJsCommonJs.bannerSize.h, duration: .3 }, "tint+=.3");
 
-	tl.from(".bubble-1", { duration: .3, opacity: 0 });
-	tl.from(".bubble-2", { duration: .3, opacity: 0 });
-	tl.from(".bubble-3", { duration: .3, opacity: 0 });
-	tl.to(".bubble", { duration: .3, opacity: 0 }, "+=1.3");
+	tl.from(".arrows", { opacity: 0, duration: .3 }, "tint+=.3");
+	tl.to(".hand-screen", { y: 0, duration: .5 }, "tint");
 
-	tl.from(".el-6", { duration: .3, opacity: 0 });
-	tl.to(".el-6", { duration: .3, opacity: 0 }, "+=" + _commonJsCommonJs.read.t3);
+	var tlShakePhone = (0, _commonJsCommonJs.shakerPhone)(".hand-screen", 4);
 
-	tl.from(".el-7", { duration: .3, opacity: 0 });
+	tlShakePhone.pause();
 
-	tl.from(".el-8-cta", { duration: .3, opacity: 0 });
+	tl.add(function () {
+		tlShakePhone.resume();
+	}, "+=1.6");
 
-	tl.add((0, _commonJsCommonJs.olg)());
+	tl.to(".frame2", { opacity: 1, duration: .3 }, "+=1");
+
+	tl.add("stop-shaking");
+
+	tl.to(".end-screen", { opacity: 1, duration: .3 }, "stop-shaking-=.5");
+
+	tl.add(function () {
+		tlShakePhone.pause(0);
+	}, "stop-shaking");
+
+	tl.to(".hand-screen", { x: -108, duration: .3 }, "stop-shaking");
+
+	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
+	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
+	// tl.play("tint")
+	tl.add(olg);
 	return tl;
 }
-
-standard();
 
 },{"../../_common/js/common.js":2}],2:[function(require,module,exports){
 "use strict";
@@ -84,7 +106,8 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = 6;
+	var XX = arguments.length <= 1 || arguments[1] === undefined ? 6 : arguments[1];
+
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
@@ -94,7 +117,10 @@ function shakerPhone(DOM) {
 	return tl;
 }
 
-function standard() {
+function standard(_ref) {
+	var handPos = _ref.handPos;
+
+	console.log(handPos);
 	var tl = init();
 	var tlDog = shakerDog();
 	tl.set(".hand-screen", { y: bannerSize.h });
@@ -103,7 +129,7 @@ function standard() {
 	tl.add("t2", "+=" + read.t1);
 	tl.to(".txt-shakin", { x: bannerSize.w, duration: .3 }, "t2");
 	tl.from(".txt-app", { x: -bannerSize.w, duration: .3 }, "t2");
-	tl.to(".hand-screen", { y: 164, duration: .5 });
+	tl.to(".hand-screen", { y: handPos, duration: .5 });
 
 	tl.add("tint", "+=" + read.t2);
 	tl.add(function () {
@@ -130,6 +156,10 @@ function standard() {
 	tl.add(function () {
 		tlShakePhone.pause(0);
 	}, "stop-shaking");
+
+	if (universalBanner.size === "300x250") {
+		tl.to(".hand-screen", { x: -5, y: -25, duration: .3 }, "stop-shaking-=.5");
+	}
 
 	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
 	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
@@ -174,6 +204,9 @@ exports.olg = _proline.olg;
 exports.read = read;
 exports.w = w;
 exports.h = h;
+exports.shakerDog = shakerDog;
+exports.shakerPhone = shakerPhone;
+exports.bannerSize = bannerSize;
 
 },{"./helpers/helpers.js":3,"./proline":4}],3:[function(require,module,exports){
 "use strict";

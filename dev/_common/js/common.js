@@ -37,8 +37,8 @@ function shakerDog(){
 	return tl
 }
 
-function shakerPhone(DOM){
-	const XX = 6	
+function shakerPhone(DOM, XX=6){
+	
 	const tl = new TimelineMax()
 	tl.repeat(-1)
 	const TIME = .002
@@ -49,7 +49,8 @@ function shakerPhone(DOM){
 	return tl
 }
 
-function standard(){	
+function standard({handPos}){	
+	console.log(handPos);
 	const tl = init()	
 	const tlDog = shakerDog()
 	tl.set(".hand-screen", {y:bannerSize.h})
@@ -59,7 +60,7 @@ function standard(){
 	tl.add("t2", `+=${read.t1}`)
 	tl.to(".txt-shakin", {x:bannerSize.w, duration:.3}, "t2")
 	tl.from(".txt-app", {x:-bannerSize.w, duration:.3}, "t2")
-	tl.to(".hand-screen", {y:164, duration:.5})
+	tl.to(".hand-screen", {y:handPos, duration:.5})
 
 	tl.add("tint", `+=${read.t2}`)
 	tl.add(()=>{
@@ -89,6 +90,11 @@ function standard(){
 	tl.add(()=>{		
 		tlShakePhone.pause(0)		
 	}, "stop-shaking")
+
+	if(universalBanner.size==="300x250"){
+		tl.to(".hand-screen", {x:-5, y:-25, duration:.3}, "stop-shaking-=.5")	
+	}
+	
 
 	tl.from([".txt-download, .end-cta"], {opacity:0, duration:.3}, "+=.5")
 	tl.from([".end-logos", ".end-corners" ], {opacity:0, duration:.3}, "+=.3")
@@ -127,4 +133,4 @@ function b_728x90(text1){
 	standard()
 }
 
-export { init, standard, b_300x250, olg, read, w, h}
+export { init, standard, b_300x250, olg, read, w, h, shakerDog, shakerPhone, bannerSize}

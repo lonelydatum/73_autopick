@@ -1,48 +1,9 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-"use strict";
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+'use strict';
 
 var _commonJsCommonJs = require('../../_common/js/common.js');
 
-function standard() {
-	var tl = (0, _commonJsCommonJs.init)();
-
-	tl.add("playa");
-	tl.from(".playa img", { duration: .5, x: -42, y: 40, ease: Power4.easeOut }, "playa");
-	tl.from(".ball", { duration: .5, x: 50, y: -50, ease: Power4.easeOut }, "playa");
-	tl.from(".t1", _extends({}, (0, _commonJsCommonJs.textOn)()), "playa+=.2");
-
-	tl.to(".t1", { duration: .2, opacity: 0 }, "+=" + _commonJsCommonJs.read.t1);
-
-	tl.from(".t2", _extends({}, (0, _commonJsCommonJs.textOn)()), "+=.1");
-	tl.from(".bubble-1", { duration: .2, opacity: 0 }, "+=.2");
-	tl.from(".bubble-2", { duration: .2, opacity: 0 });
-	tl.from(".bubble-3", { duration: .2, opacity: 0 });
-	tl.to(".t2", { duration: .2, opacity: 0 }, "+=" + _commonJsCommonJs.read.t2);
-	tl.from(".t3", _extends({}, (0, _commonJsCommonJs.textOn)()));
-	tl.to([".t3", ".bubble", ".bet"], { duration: .2, opacity: 0 }, "+=" + _commonJsCommonJs.read.t3);
-
-	// tl.add("scale")
-	// tl.to([".phone"], {duration:.2, scale:.55, x:-38, y:-30}, "scale")
-	// tl.to([".playa"], {duration:.2, scale:1.1, x:-25, y:-1}, "scale")
-	// tl.to([".ball"], {duration:.2, scale:.55, x:-38, y:-30}, "scale")
-
-	tl.add("tint");
-	tl.to(".proline-small", { duration: .2, opacity: 0 }, "tint");
-	tl.from(".tint", { duration: .5, ease: Power4.easeOut, y: -_commonJsCommonJs.h, opacity: 0 }, "tint");
-
-	tl.from([".end-logos"], { duration: .3, opacity: 0 }, "+=.2");
-
-	tl.from(".end-cta", { duration: .3, opacity: 0 }, "+=.2");
-	tl.add("final");
-	tl.from(".end-legal", { duration: .3, opacity: 0 }, "final+=.2");
-	tl.add((0, _commonJsCommonJs.olg)(), "final");
-
-	return tl;
-}
-
-standard();
+(0, _commonJsCommonJs.standard)({ handPos: 164 });
 
 },{"../../_common/js/common.js":2}],2:[function(require,module,exports){
 "use strict";
@@ -92,7 +53,8 @@ function shakerDog() {
 }
 
 function shakerPhone(DOM) {
-	var XX = 6;
+	var XX = arguments.length <= 1 || arguments[1] === undefined ? 6 : arguments[1];
+
 	var tl = new TimelineMax();
 	tl.repeat(-1);
 	var TIME = .002;
@@ -102,7 +64,10 @@ function shakerPhone(DOM) {
 	return tl;
 }
 
-function standard() {
+function standard(_ref) {
+	var handPos = _ref.handPos;
+
+	console.log(handPos);
 	var tl = init();
 	var tlDog = shakerDog();
 	tl.set(".hand-screen", { y: bannerSize.h });
@@ -111,7 +76,7 @@ function standard() {
 	tl.add("t2", "+=" + read.t1);
 	tl.to(".txt-shakin", { x: bannerSize.w, duration: .3 }, "t2");
 	tl.from(".txt-app", { x: -bannerSize.w, duration: .3 }, "t2");
-	tl.to(".hand-screen", { y: 164, duration: .5 });
+	tl.to(".hand-screen", { y: handPos, duration: .5 });
 
 	tl.add("tint", "+=" + read.t2);
 	tl.add(function () {
@@ -138,6 +103,10 @@ function standard() {
 	tl.add(function () {
 		tlShakePhone.pause(0);
 	}, "stop-shaking");
+
+	if (universalBanner.size === "300x250") {
+		tl.to(".hand-screen", { x: -5, y: -25, duration: .3 }, "stop-shaking-=.5");
+	}
 
 	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
 	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
@@ -182,6 +151,9 @@ exports.olg = _proline.olg;
 exports.read = read;
 exports.w = w;
 exports.h = h;
+exports.shakerDog = shakerDog;
+exports.shakerPhone = shakerPhone;
+exports.bannerSize = bannerSize;
 
 },{"./helpers/helpers.js":3,"./proline":4}],3:[function(require,module,exports){
 "use strict";

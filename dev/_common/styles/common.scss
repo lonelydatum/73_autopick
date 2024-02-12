@@ -90,3 +90,23 @@ img{
 
 
 
+.absolute {
+	position: absolute;
+	top:0;
+	left:0;
+}
+
+
+.tint{	
+	opacity:.46;	
+	mix-blend-mode: hard-light;
+
+}
+
+
+
+.hand-screen{
+	.end-screen{
+		opacity:0;
+	}	
+}

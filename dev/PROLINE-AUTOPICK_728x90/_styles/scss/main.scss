@@ -2,39 +2,6 @@
 
 
 
-
-.playa{
-	clip-path: polygon(104px 85px, 106px 90px, 234px 90px, 234px 0px, 0px 0px );
-	@include pos(0, 0);
-	width: 728px;
-	height: 90px;
-	img{
-		@include pos-scale(0, 0, .5);
-	}
+#legalBtn{
+	@include pos(660, 0);
 }
-
-
-.tint{
-	width: 100%;
-	height: 100%;
-	background-color: black;
-	// opacity: .8;
-	@include pos(0, 0);
-}
-
-// .ball{
-// 	@include pos-scale(0, 0, .5);
-// }
-
-// .phone{
-// 	@include pos-scale(0, 0, .5);
-// }
-
-
-// .proline-small{
-// 	@include pos-scale(0, 0, .5);
-// }
-
-// .phone, .ball, .playa{
-// 	@include pos-scale(225, 0, .5);
-// }

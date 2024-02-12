@@ -196,6 +196,21 @@ canvas, .text, .frame, .outline, img {
   image-rendering: -webkit-optimize-contrast;
 }
 
+.absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tint {
+  opacity: .46;
+  mix-blend-mode: hard-light;
+}
+
+.hand-screen .end-screen {
+  opacity: 0;
+}
+
 #banner {
   width: 160px;
   height: 600px;
@@ -224,21 +239,6 @@ canvas, .text, .frame, .outline, img {
   perspective: 1000px;
   position: absolute;
   width: 72px;
-}
-
-.tint {
-  opacity: .46;
-  mix-blend-mode: hard-light;
-}
-
-.absolute {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.hand-screen .end-screen {
-  opacity: 0;
 }
 
 /*# sourceMappingURL=main.css.map */
