@@ -56,7 +56,7 @@ function standard(_ref) {
 	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
 	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
 	// tl.play("tint")
-	tl.add(olg);
+	tl.add(_commonJsCommonJs.olg);
 	return tl;
 }
 

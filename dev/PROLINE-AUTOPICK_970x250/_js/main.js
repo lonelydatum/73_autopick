@@ -1,4 +1,4 @@
-import {init, read, bannerSize, shakerDog, shakerPhone} from '../../_common/js/common.js'
+import {olg, init, read, bannerSize, shakerDog, shakerPhone} from '../../_common/js/common.js'
 
 standard({handPos:0})
 function standard({handPos}){	

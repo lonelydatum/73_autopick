@@ -49,12 +49,12 @@ function standard(_ref) {
 		tlShakePhone.pause(0);
 	}, "stop-shaking");
 
-	tl.to(".hand-screen", { x: -108, duration: .3 }, "stop-shaking");
+	tl.to(".hand-screen", { x: -94, duration: .3 }, "stop-shaking");
 
 	tl.from([".txt-download, .end-cta"], { opacity: 0, duration: .3 }, "+=.5");
 	tl.from([".end-logos", ".end-corners"], { opacity: 0, duration: .3 }, "+=.3");
 	// tl.play("tint")
-	tl.add(olg);
+	tl.add(_commonJsCommonJs.olg);
 	return tl;
 }
 

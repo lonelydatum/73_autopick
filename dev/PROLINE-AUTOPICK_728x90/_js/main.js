@@ -1,4 +1,4 @@
-import {init, read, bannerSize, shakerDog, shakerPhone} from '../../_common/js/common.js'
+import {olg, init, read, bannerSize, shakerDog, shakerPhone} from '../../_common/js/common.js'
 
 standard({handPos:0})
 function standard({handPos}){	
@@ -56,7 +56,7 @@ function standard({handPos}){
 		tlShakePhone.pause(0)		
 	}, "stop-shaking")
 
-	tl.to(".hand-screen", {x:-236, duration:.3}, "stop-shaking")	
+	tl.to(".hand-screen", {x:-195, duration:.3}, "stop-shaking")	
 
 	
 
