@@ -43,7 +43,7 @@ function standard({handPos}){
 	
 	
 
-	tl.to(".frame2", {opacity:1, duration:.3}, "+=1")
+	tl.to(".frame2", {opacity:1, duration:.3}, "+=2")
 	
 
 	tl.add("stop-shaking")
