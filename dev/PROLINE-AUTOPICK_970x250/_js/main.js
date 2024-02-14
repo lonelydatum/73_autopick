@@ -39,12 +39,13 @@ function standard({handPos}){
 	tlShakePhone.pause()
 	
 	tl.add(()=>{
+		TweenLite.set(".end-screen-00", {opacity:1, delay:.3})
 		tlShakePhone.resume()
 	}, "+=1.6")
 	
 	
 
-	tl.to(".frame2", {opacity:1, duration:.3}, "+=1")
+	tl.to(".frame2", {opacity:1, duration:.3}, "+=2")
 	
 
 	tl.add("stop-shaking")

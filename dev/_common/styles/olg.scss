@@ -45,3 +45,9 @@
     transform-origin: 0% 100% !important;
     @include prefix( translate(0px, 0px) scale(1, 0) );
 }
+
+
+
+.end-screen-00 {
+	opacity: 0;
+}

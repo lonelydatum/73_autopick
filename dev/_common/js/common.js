@@ -79,6 +79,7 @@ function standard({handPos}){
 	tlShakePhone.pause()
 	
 	tl.add(()=>{
+		TweenLite.set(".end-screen-00", {opacity:1, delay:.3})
 		tlShakePhone.resume()
 	}, "+=1.6")
 	
