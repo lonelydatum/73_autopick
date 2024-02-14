@@ -94,7 +94,7 @@ function standard({handPos}){
 	},"stop-shaking")
 
 	if(universalBanner.size==="300x250"){
-		tl.to(".hand-screen", {x:-5, y:-25, duration:.3}, "stop-shaking-=.5")	
+		tl.to(".hand-screen", {x:3, y:28, duration:.3}, "stop-shaking-=.5")	
 	}
 	
 
