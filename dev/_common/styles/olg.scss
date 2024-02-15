@@ -51,3 +51,8 @@
 .end-screen-00 {
 	opacity: 0;
 }
+
+.end-corners{
+	z-index: 99;
+	pointer-events: none;
+}
